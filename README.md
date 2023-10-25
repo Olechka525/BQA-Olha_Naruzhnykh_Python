@@ -1,4 +1,4 @@
-# become-qa-auto-oct
+# BQA-Olha_Naruzhnykh_Python
 This framework is designed in order to perform tests for github using  UI and API approaches.
 
 ## Framework structure
