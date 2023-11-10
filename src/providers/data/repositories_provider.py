@@ -1,8 +1,3 @@
-from faker import Faker
-
-fake = Faker()
-
-
 class RepositoriesProvider:
     @staticmethod
     def existing_repository():
@@ -15,7 +10,7 @@ class RepositoriesProvider:
     @staticmethod
     def non_existent_repository():
         return {
-            "repository_name": fake.name(),
+            "repository_name": "jdvjdnvjn_repo",
             "total_count": 0,
             "items_count": 0,
         }
