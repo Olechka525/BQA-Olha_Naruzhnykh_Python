@@ -17,9 +17,23 @@ class JSONConfigProvider:
             return json.load(json_file)  # convert to dict/treeMap
 
     @staticmethod
+    def get_user_data(item_name: str) -> Any:
+        value = JSONConfigProvider._read_config(
+            ".\\src\\config\\envs\\user_data.json"
+        )  # Read the file
+        return value[item_name]  # get the value from the file by parameter name
+
+    @staticmethod
+    def get_repository_data(item_name: str) -> Any:
+        value = JSONConfigProvider._read_config(
+            ".\\src\\config\\envs\\repositories_data.json"
+        )  # Read the file
+        return value[item_name]  # get the value from the file by parameter name
+
+    @staticmethod
     def get(item_name: str) -> Any:
         value = JSONConfigProvider._read_config(
-            ".\src\config\envs\qa.json"
+            ".\\src\\config\\envs\\qa.json"
         )  # Read the file
         return value.get(item_name)  # get the value from the file by parameter name
 
@@ -47,24 +61,12 @@ class Config:
     def _register(self, item_name: str) -> None:
         """
         Retrieves the value of parameter with item_name name from the
-        config providers/sources and store it in config class for later usage
         """
-        for (
-            provider
-        ) in self.config_providers:  # iterate over list of config providers/sources
-            value = provider.get(
-                item_name
-            )  # try to get value by name from config providers/sources
+
+        for (provider) in self.config_providers:  # iterate over list of config providers/sources
+            value = provider.get(item_name)  # try to get value by name from config providers/sources
             if value is not None:  # if value exists/retrived
                 self.conf_dict[item_name] = value  # save it to config class
-                return  # STOP further search
+            return  # STOP further search
 
-        raise ValueError(
-            f"{item_name} name is missing in config providers"
-        )  # if no value for parameter item_name name found - stop TEST FRAMEWOEK execution
-
-
-config = Config([OSConfigProvider, JSONConfigProvider])
-
-print(config.get("PARAMETER_JSON"))
-print(config.get("PARAMETER_ENV"))
+        raise ValueError(f"{item_name} name is missing in config providers")  # if no value for parameter item_name name found - stop TEST FRAMEWOEK execution

@@ -1,3 +1,5 @@
+from src.config.config_harder import JSONConfigProvider
+
 from faker import Faker
 
 fake = Faker()
@@ -9,9 +11,12 @@ class UsersProvider:
         return {
             "username": fake.name(),
             "password": fake.password(),
-            "id": 12983874935636,
+            "id": fake.unique.random_int(),
         }
 
     @staticmethod
     def existing_user():
-        return {"username": "Olechka525", "id": 147033325}
+        return {
+            "username": JSONConfigProvider.get_user_data("USERNAME"),
+            "id": JSONConfigProvider.get_user_data("ID"),
+        }

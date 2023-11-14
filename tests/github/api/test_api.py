@@ -22,7 +22,6 @@ def test_search_for_existing_repo(github_api_client):
     repo = RepositoriesProvider.existing_repository()
     repos = github_api_client.search_repos(repo["repository_name"])
 
-    print("Cheking total count is not 0")
     assert repos["total_count"] == repo["total_count"]
     assert len(repos["items"]) == repo["items_count"]
 
@@ -31,6 +30,5 @@ def test_search_for_nonexisting_repo(github_api_client):
     repo = RepositoriesProvider.non_existent_repository()
     repos = github_api_client.search_repos(repo["repository_name"])
 
-    print("Cheking total count is 0")
     assert repos["total_count"] == repo["total_count"]
     assert len(repos["items"]) == repo["items_count"]

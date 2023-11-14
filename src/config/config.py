@@ -11,6 +11,7 @@ class Config:
 
     domain_api = os.environ.get("GITHUB_DOMAIN_API", "https://api.github.com")
     domain_ui = os.environ.get("GITHUB_DOMAIN_UI", "https://github.com")
+    browser_name = os.environ.get("BROWSER_NAME", "chrome")
 
     request_timeout = 25
     user_name = os.environ.get("USERNAME")
