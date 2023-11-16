@@ -13,7 +13,8 @@ def github_api_client(scope="session"):
 
 @pytest.fixture
 def github_login_page_object(scope="session"):
-    driver = BrowserProvider.get_driver(Config.browser_name)
+    driver = BrowserProvider.get_driver(Config.browser_name, True)
+
     github_login_page = GitHubUiLoginPage(driver, Config.domain_ui)
     github_login_page.navigate_to_login_page()
 

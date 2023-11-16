@@ -1,6 +1,6 @@
 FROM python:3.11-slim-bullseye
 
-RUN pip install pytest requests selenium
+RUN pip install pytest requests selenium faker pytest-html
 
 WORKDIR /tests
 
@@ -8,5 +8,6 @@ WORKDIR /tests
 # COPY EVERYTHING from LOCALFOLDER to CURRENT FODLER IN CONTAINER(which is /tests)
 COPY . .
 
+ENTRYPOINT ["pytest" ]
 # specidfy command to run
-CMD [ "pytest"]
+CMD ["--html=reports/report.html", "--self-contained-html"] 
